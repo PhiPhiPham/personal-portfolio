@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import Script from 'next/script';
 
 declare global {
@@ -104,10 +104,15 @@ const particlesConfig = {
 };
 
 export default function ParticlesBackground() {
+  const bridgeCleanupRef = useRef<(() => void) | null>(null);
+
   const cleanupParticles = useCallback(() => {
     if (typeof window === 'undefined') {
       return;
     }
+
+    bridgeCleanupRef.current?.();
+    bridgeCleanupRef.current = null;
 
     window.pJSDom?.forEach((instance) => {
       instance?.pJS?.fn?.vendors?.destroy?.();
@@ -118,6 +123,49 @@ export default function ParticlesBackground() {
     }
   }, []);
 
+  const setupInteractivityBridge = useCallback(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const heroSection = document.getElementById('hero-section');
+    const particlesCanvas = document.querySelector<HTMLCanvasElement>(
+      '#hero-particles > canvas',
+    );
+
+    if (!heroSection || !particlesCanvas) {
+      return;
+    }
+
+    const forwardEvent =
+      (type: 'mousemove' | 'mouseleave' | 'click') => (event: MouseEvent) => {
+        const simulatedEvent = new MouseEvent(type, {
+          bubbles: true,
+          cancelable: true,
+          clientX: event.clientX,
+          clientY: event.clientY,
+          screenX: event.screenX,
+          screenY: event.screenY,
+        });
+
+        particlesCanvas.dispatchEvent(simulatedEvent);
+      };
+
+    const handleMouseMove = forwardEvent('mousemove');
+    const handleMouseLeave = forwardEvent('mouseleave');
+    const handleClick = forwardEvent('click');
+
+    heroSection.addEventListener('mousemove', handleMouseMove);
+    heroSection.addEventListener('mouseleave', handleMouseLeave);
+    heroSection.addEventListener('click', handleClick);
+
+    return () => {
+      heroSection.removeEventListener('mousemove', handleMouseMove);
+      heroSection.removeEventListener('mouseleave', handleMouseLeave);
+      heroSection.removeEventListener('click', handleClick);
+    };
+  }, []);
+
   const initializeParticles = useCallback(() => {
     if (typeof window === 'undefined' || !window.particlesJS) {
       return;
@@ -125,7 +173,13 @@ export default function ParticlesBackground() {
 
     cleanupParticles();
     window.particlesJS('hero-particles', particlesConfig);
-  }, [cleanupParticles]);
+
+    // Particle.js injects the canvas asynchronously; delay ensures it's present before wiring events.
+    requestAnimationFrame(() => {
+      bridgeCleanupRef.current?.();
+      bridgeCleanupRef.current = setupInteractivityBridge() ?? null;
+    });
+  }, [cleanupParticles, setupInteractivityBridge]);
 
   useEffect(() => {
     if (typeof window === 'undefined') {
