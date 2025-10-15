@@ -5,10 +5,12 @@ import PortfolioShowcase from './components/portfolio-showcase';
 
 export default function Home() {
   return (
-    <div className="container mx-auto items-center justify-items-center min-h-screen  font-[family-name:var(--font-inter)]">
+    <main className="flex flex-col min-h-screen w-full font-[family-name:var(--font-inter)]">
       <HeroSection />
-      <PortfolioShowcase />
+      <div className="container mx-auto flex-1">
+        <PortfolioShowcase />
+      </div>
       <Footer />
-    </div>
+    </main>
   );
 }

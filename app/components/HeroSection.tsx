@@ -4,6 +4,7 @@ import { Github, Linkedin, FileUser, ChevronDown } from "lucide-react"
 import { motion } from "motion/react"
 import Image from "next/image"
 import LeetcodeIcon from './leet-code'
+import ParticlesBackground from "./ParticlesBackground"
 import {
     Tooltip,
     TooltipContent,
@@ -76,10 +77,11 @@ export default function HeroSection() {
     };
 
     return (
-        <div className="relative flex flex-col items-center justify-center min-h-screen font-[family-name:var(--font-inter)] ">
+        <div className="relative flex flex-col items-center justify-center min-h-screen w-full overflow-hidden bg-transparent font-[family-name:var(--font-inter)]">
+            <ParticlesBackground />
             <section
                 id="hero-section"
-                className="container mx-auto px-6 py-12 flex flex-col items-center lg:flex-row lg:justify-between flex-grow"
+                className="relative z-10 container mx-auto px-6 py-12 flex flex-col items-center lg:flex-row lg:justify-between flex-grow"
             >
                 <motion.div
                     className="lg:w-1/2 space-y-8"
@@ -223,4 +225,3 @@ export default function HeroSection() {
         </div>
     )
 }
-
