@@ -22,10 +22,10 @@ declare global {
 const particlesConfig = {
   particles: {
     number: {
-      value: 80,
+      value: 150,
       density: {
         enable: true,
-        value_area: 900,
+        value_area: 1500,
       },
     },
     color: {
@@ -35,7 +35,7 @@ const particlesConfig = {
       type: 'circle',
     },
     opacity: {
-      value: 0.45,
+      value: 0.5,
       random: false,
       anim: {
         enable: false,
@@ -63,7 +63,7 @@ const particlesConfig = {
     },
     move: {
       enable: true,
-      speed: 1.2,
+      speed: 3,
       direction: 'none',
       random: false,
       straight: false,
@@ -150,7 +150,7 @@ export default function ParticlesBackground() {
       />
       <div
         id="hero-particles"
-        className="pointer-events-none absolute inset-0 z-0 opacity-90"
+        className="absolute inset-0 z-0 opacity-90"
       />
     </>
   );
