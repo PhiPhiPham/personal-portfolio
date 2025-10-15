@@ -10,92 +10,86 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 
-const projectDetails = {
+interface ProjectSection { id: string; title: string }
+interface AiPipelineStep { step: string; description: string }
+interface TechStack { [key: string]: string }
+
+interface BaseProject {
+    title: string
+    client: string
+    year: number
+    duration: string
+    tags: string[]
+    description: string
+    challenge: string
+    solution: string
+    images: string[]
+    sections: ProjectSection[]
+    results?: string | null
+    link?: string
+}
+
+type Project = BaseProject & {
+    systemArchitecture?: string
+    myRole?: string
+    keyContributions?: string[]
+    aiPipeline?: AiPipelineStep[]
+    technicalHighlights?: string[]
+    challengesLearnings?: string
+    futureImprovements?: string[]
+    techStack?: TechStack
+    team?: string[]
+    designers?: string[]
+}
+
+const projectDetails: Record<number, Project> = {
     1: {
-        title: "Studdies API",
-        client: "Personal project",
+        title: "E-commerce Platform Sohnne",
+        client: "Sohnne",
         year: 2024,
-        duration: "10 weeks",
-        tags: ["Node.js", "Express", "Prisma", "Supabase Auth", "PostgreSQL", "Docker"],
-        results:
-            "Running in Docker with automated Prisma migrations and powering a private beta used by my study accountability circle.",
+        duration: "6 months",
+        tags: ["UI/UX", "React", "TypeScript", "Supabase", "Elysia.js", "Tailwind"],
+        results: null,
         description:
-            "Studdies is the backend that drives a Strava-for-studying experience: social feeds, streak tracking, and friend interactions designed to keep students accountable.",
+            "A full-stack e-commerce solution with user authentication, product management, and payment PayPal integration.",
         challenge:
-            "I needed a backend that could blend Supabase-managed authentication with custom domain logic, support media uploads, and keep streaks accurate even when users study across time zones.",
+            "The existing platform had a high bounce rate and low conversion rates. Users were struggling with navigation and the checkout process was overly complex. The platform was not responsive and did not have a good user experience.",
         solution:
-            "I built a modular Express service with Prisma models for posts, comments, friendships, and streaks. Supabase handles auth and storage, Docker Compose keeps local development easy, and shared utilities recalculate streaks and study-time aggregates whenever a session is created or updated.",
+            "We implemented a user-centered design approach, simplified the navigation structure, and streamlined the checkout process to reduce cart abandonment. We also implemented a responsive design and a good user experience.",
         images: [
-            "/studdies-placeholder.svg",
+            "/sohnne.jpg",
+            "/sohnne.jpg",
         ],
         sections: [
             { id: "overview", title: "Project Overview" },
             { id: "challenge", title: "The Challenge" },
             { id: "solution", title: "Our Solution" },
-            { id: "technical", title: "Technical Highlights" },
-            { id: "future", title: "Future Improvements" },
-            { id: "tech-stack", title: "Tech Stack" },
+            { id: "gallery", title: "Image Gallery" },
         ],
-        technicalHighlights: [
-            "Prisma schema models study sessions, comments, streaks, and friendships with aggregate queries surfaced through helper utilities.",
-            "Supabase Auth tokens are validated inside Express middleware to gate protected routes and personalize uploads to Supabase Storage.",
-            "Reusable validation/error helpers keep REST responses consistent for the mobile app and Postman contract tests in the repo.",
-        ],
-        futureImprovements: [
-            "Introduce WebSocket notifications so friends see study sessions appear in real time.",
-            "Schedule weekly recap jobs that summarize streaks and time-on-task per user.",
-            "Add observability using OpenTelemetry and Ship-ready tracing for Prisma queries.",
-        ],
-        techStack: {
-            backend: "Node.js, Express.js, TypeScript-friendly tooling",
-            database: "PostgreSQL (Supabase) with Prisma ORM",
-            authentication: "Supabase Auth with JWT verification middleware",
-            infrastructure: "Docker Compose for local orchestration and Supabase Storage for assets",
-        },
-        link: "https://github.com/PhiPhiPham/Studdies",
     },
     2: {
-        title: "Project.XO Personality Platform",
-        client: "Project.XO core team",
-        year: 2025,
-        duration: "8 weeks",
-        tags: ["Next.js", "TypeScript", "Supabase", "React Query", "Zustand", "Midtrans"],
-        results:
-            "Runs our compatibility quiz pilot program, processing paid sessions via Midtrans and serving results dashboards for early adopters.",
+        title: "iOS Valorant App",
+        client: "Valorant",
+        year: 2024,
+        duration: "1 month",
+        tags: ["Swift", "SwiftUI", "UIKit"],
         description:
-            "Project.XO is an end-to-end personality assessment that pairs quiz results with curated match recommendations. I lead the web experience, integrating authentication, paywalls, and the quiz engine.",
+            "A Swift UIKit mobile app built programmatically using collection views, scroll views, and tables, with data fetched via API calls. This is for my learning purpose.",
         challenge:
-            "We needed a single experience that could host long-form quizzes, paywalled result breakdowns, and a member dashboard—while keeping load times snappy for mobile users joining from marketing campaigns.",
+            "Creating a native iOS app that provides real-time Valorant game data and statistics while maintaining smooth performance and intuitive navigation. The app needed to handle complex data structures from the Valorant API and present them in an engaging way for mobile users.",
         solution:
-            "I structured the App Router with public, auth, and protected segments, prefetched quiz data with React Query, and wired Supabase Auth into NextAuth for session management. API routes wrap Midtrans payments so users can pay, receive receipts, and jump straight into detailed compatibility reports.",
+            "Developed a native iOS application using Swift and UIKit with programmatic UI implementation. Implemented collection views for dynamic content display, scroll views for smooth navigation, and table views for organized data presentation. Integrated RESTful API calls to fetch real-time game data and implemented efficient data caching for optimal performance.",
+        results:
+            "Successfully delivered a performant iOS app that provides Valorant players with easy access to game statistics and information. The app features smooth animations, responsive design, and efficient data loading, enhancing the gaming experience for Valorant enthusiasts.",
         images: [
-            "/projectxo-placeholder.svg",
+
+
         ],
         sections: [
             { id: "overview", title: "Project Overview" },
             { id: "challenge", title: "The Challenge" },
             { id: "solution", title: "Our Solution" },
-            { id: "technical", title: "Technical Highlights" },
-            { id: "future", title: "Future Improvements" },
-            { id: "tech-stack", title: "Tech Stack" },
         ],
-        technicalHighlights: [
-            "Separated layouts for public marketing, onboarding, and authenticated dashboards using the Next.js App Router.",
-            "React Query hydrates quiz questions and compatibility results on the server to avoid loading states between steps.",
-            "Custom Midtrans integration via API routes delivers Snap tokens, verifies notifications, and persists transaction status.",
-        ],
-        futureImprovements: [
-            "Add real-time match rooms so members can immediately connect with compatible profiles.",
-            "Layer in AI-generated insight summaries for each personality pairing.",
-            "Localize the experience into English and Bahasa Indonesia with dynamic routing.",
-        ],
-        techStack: {
-            frontend: "Next.js 15 App Router, TypeScript, Tailwind",
-            stateManagement: "React Query for data fetching, Zustand for client session state",
-            authentication: "Supabase Auth + NextAuth session bridge",
-            payments: "Midtrans Snap API via server-side routes",
-        },
-        link: "https://github.com/PhiPhiPham/ProjectXO-Frontend",
     },
     3: {
         title: "Findect",
@@ -200,140 +194,90 @@ const projectDetails = {
             { id: "tech-stack", title: "Tech Stack" },
             { id: "team", title: "Team" },
         ],
-        link: "https://github.com/PhiPhiPham/CH4-RAG-BE",
+        link: "https://github.com/RafieAmandio/CH-4",
     },
     4: {
-        title: "3D BeReal (TreeHacks)",
-        client: "TreeHacks 2024 Hackathon",
-        year: 2024,
-        duration: "48 hours",
-        tags: ["Swift", "UIKit", "AVFoundation", "Firebase"],
+        title: "Quickthought",
+        client: "Apple Academy 1st Project",
+        year: 2025,
+        duration: "1 month",
+        tags: ["Swift", "SwiftUI"],
         description:
-            "A hackathon prototype that reimagines BeReal in 3D—capturing synchronized front and back video snippets and publishing them to a shared Firebase feed.",
+            "A speed journaling app, built with Swift, SwiftUI. It allows users to journal their thoughts in a limited time span and a voice to text feature.",
         challenge:
-            "Our team wanted to capture quick 3D moments with both cameras while keeping the recording experience smooth and automated for non-technical users.",
+            "Creating an engaging journaling experience that encourages users to write regularly by gamifying the process. The app needed to balance simplicity with functionality, providing a quick and intuitive way to capture thoughts while maintaining user engagement through time-based challenges.",
         solution:
-            "I built a custom AVCaptureSession workflow with a countdown, auto-start recording, and automatic stop/upload after three seconds. The app toggles between front and rear lenses, streams a live preview, and ships clips to Firebase Storage with Firestore metadata so other teammates can replay the moment.",
-        results:
-            "We demoed the working prototype to TreeHacks judges—showing front/back video capture, uploads, and feed retrieval in under 48 hours.",
+            "Developed a SwiftUI-based iOS app that implements time-limited journaling sessions to create urgency and engagement. Integrated voice-to-text functionality for hands-free journaling. Implemented a clean, minimalist interface that focuses on the writing experience. Added progress tracking and achievement system to motivate consistent usage.",
         images: [
-            "/treehacks-placeholder.svg",
+            "/quickthought.png",
         ],
         sections: [
             { id: "overview", title: "Project Overview" },
             { id: "challenge", title: "The Challenge" },
             { id: "solution", title: "Our Solution" },
-            { id: "technical", title: "Technical Highlights" },
-            { id: "future", title: "Future Improvements" },
-            { id: "tech-stack", title: "Tech Stack" },
         ],
-        technicalHighlights: [
-            "AVCaptureMovieFileOutput orchestrates synchronized three-second clips with a visible countdown overlay.",
-            "Automatic camera switching gives users a choice of front or rear capture without rebuilding the session.",
-            "Firebase Storage + Firestore integration handles media uploads, timestamps, and collaborative playback.",
-        ],
-        futureImprovements: [
-            "Add depth capture and environment meshes to enhance the 3D effect.",
-            "Build a social timeline that streams friends’ clips in real time.",
-            "Experiment with ARKit compositing for interactive overlays.",
-        ],
-        techStack: {
-            mobile: "UIKit-based iOS app with Interface Builder outlets",
-            media: "AVFoundation capture pipelines with countdown UX",
-            cloud: "Firebase Storage for video assets, Firestore for metadata",
-        },
-        link: "https://github.com/PhiPhiPham/TreeHacks24",
     },
     5: {
-        title: "Spatial Audio Weapons Lab",
-        client: "Personal prototype",
-        year: 2024,
-        duration: "6 weeks",
-        tags: ["SwiftUI", "AVFoundation", "MultipeerConnectivity", "CoreBluetooth", "CoreMotion"],
+        title: "MomoRun",
+        client: "Apple Academy 2nd Project",
+        year: 2025,
+        duration: "1 month",
+        tags: ["Swift", "SwiftUI", "CoreMotion"],
         description:
-            "An experimental SwiftUI experience that simulates co-located laser tag using spatial audio, iBeacons, and haptics.",
+            "A never ending running game, built with Swift, SwiftUI. It allows users to control the character to avoid obstacles using apple watch.",
         challenge:
-            "I wanted to explore what a multiplayer audio-first game could feel like—players moving in the same room while sound, motion, and haptics react instantly to their positions.",
+            "Creating an engaging endless runner game that leverages Apple Watch integration for unique gameplay mechanics. The challenge was to design intuitive controls that work seamlessly between iPhone and Apple Watch while maintaining smooth gameplay and engaging progression systems. and also we wanted to make the game to be isometric view so its like 3d",
         solution:
-            "The app orchestrates an AVAudioEngine for 3D weapon sounds, pairs devices through MultipeerConnectivity, and advertises proximity with CoreBluetooth iBeacons. Haptics and motion gestures reload weapons, while SwiftUI visualizations help players understand spatial positions.",
+            `iOS Game with Apple Watch
+Built a cross-platform iOS game using SwiftUI and CoreMotion that connects to Apple Watch. Created gesture controls on the watch to move characters and avoid obstacles. The game is an endless runner with randomly generated obstacles that get harder over time.
+Added health tracking through HealthKit to encourage users to stay active. Built a system to place game blocks correctly for the isometric 3D view. Set up HealthKit sessions to keep the Apple Watch connected throughout gameplay.
+The game works smoothly across iPhone and Apple Watch, with real-time motion controls and health data tracking. Used procedural generation for obstacles and created custom positioning calculations for the 3D game world.`,
         results:
-            "Used in several internal demos to explore multiplayer spatial audio design patterns and showcase an experimental UX.",
+            "Successfully delivered an innovative gaming experience that bridges iPhone and Apple Watch. The game encourages physical activity while providing entertainment, making it a unique fitness-gaming hybrid. The seamless cross-device integration received positive user feedback.",
         images: [
-            "/spatial-audio-placeholder.svg",
+            "/momo.png",
+            "/move.png",
+            "/move2.png",
+            "/move3.png",
+            "/move4.png",
         ],
         sections: [
             { id: "overview", title: "Project Overview" },
             { id: "challenge", title: "The Challenge" },
             { id: "solution", title: "Our Solution" },
-            { id: "technical", title: "Technical Highlights" },
-            { id: "future", title: "Future Improvements" },
-            { id: "tech-stack", title: "Tech Stack" },
+            { id: "gallery", title: "Image Gallery" },
         ],
-        technicalHighlights: [
-            "Custom AVAudioEngine wrapper positions weapon sounds in 3D space and supports hot-swapping presets.",
-            "MultipeerConnectivity + CoreBluetooth beacons synchronize player state and broadcast identities in shared rooms.",
-            "MotionReloadManager and HapticManager translate device movement into reload gestures and tactile feedback.",
-        ],
-        futureImprovements: [
-            "Integrate RealityKit visuals for mixed reality weapon previews.",
-            "Bring in real-world room impulse responses for more believable spatial acoustics.",
-            "Package the experience as a teaching demo for WWDC student sessions.",
-        ],
-        techStack: {
-            frontend: "SwiftUI with custom carousel and HUD components",
-            audio: "AVAudioEngine, spatial audio routing, volume monitoring",
-            connectivity: "MultipeerConnectivity, CoreBluetooth iBeacons, CoreMotion reload gestures",
-        },
-        link: "https://github.com/PhiPhiPham/Spatial-Audio-Weapons-App",
     },
     6: {
-        title: "Studdies iOS Companion",
-        client: "Personal project",
-        year: 2024,
-        duration: "10 weeks",
-        tags: ["SwiftUI", "Combine", "Supabase Auth", "Keychain", "REST"],
+        title: "Boco",
+        client: "Apple Academy 3rd Project",
+        year: 2025,
+        duration: "1 month",
+        tags: ["Swift", "SwiftUI", "HealthKit", 'LLama3'],
         description:
-            "The SwiftUI companion for Studdies that delivers the social study feed, session tracking, and friend management on iPhone.",
+            "A body composition tracker built with Swift and SwiftUI, enabling users to monitor their progress over time. Features include image-to-text extraction for easy data entry and seamless integration with Apple Health.",
         challenge:
-            "I needed a polished mobile experience that could talk to an evolving backend, survive flaky APIs, and make it easy for students to log sessions on the go.",
+            "Creating a comprehensive health tracking app that simplifies the process of monitoring body composition data. The challenge was to make data entry effortless while providing meaningful insights and maintaining privacy standards required for health applications.",
         solution:
-            "I built a Combine-based networking layer with automatic decoding fallbacks, wrapped auth tokens in a shared Keychain helper, and designed SwiftUI views for feed, timer, and profile flows. A diagnostics panel lets us test connection, login, and feed endpoints directly from the app.",
+            "Built a SwiftUI-based iOS app with HealthKit integration for secure health data management. Implemented image-to-text extraction using Vision framework for easy data entry from photos. Created intuitive data visualization and progress tracking features. Ensured compliance with Apple's health data privacy guidelines while providing comprehensive analytics.",
         results:
-            "Currently powering the private beta for my accountability group—used daily to log study sessions and track streaks.",
+            "Delivered a user-friendly health tracking application that makes body composition monitoring accessible and engaging. The image-to-text feature significantly reduces data entry friction, while HealthKit integration ensures data security and seamless health ecosystem integration.",
         images: [
-            "/studdies-ios-placeholder.svg",
+            "/bocoo.png",
         ],
         sections: [
             { id: "overview", title: "Project Overview" },
             { id: "challenge", title: "The Challenge" },
             { id: "solution", title: "Our Solution" },
-            { id: "technical", title: "Technical Highlights" },
-            { id: "future", title: "Future Improvements" },
-            { id: "tech-stack", title: "Tech Stack" },
+            { id: "gallery", title: "Image Gallery" },
         ],
-        technicalHighlights: [
-            "Combine-powered APIService gracefully handles multiple backend response shapes and centralizes auth headers.",
-            "ConnectionTestService provides in-app health checks, raw network tests, and login diagnostics for QA.",
-            "TimerService plus motion-driven UI components offer a delightful way to run timed study sessions with progress rings.",
-        ],
-        futureImprovements: [
-            "Persist feed data offline with Core Data and background refresh.",
-            "Enable push notifications for friend requests and streak milestones.",
-            "Expand the timer into multi-phase study/break presets.",
-        ],
-        techStack: {
-            frontend: "SwiftUI, custom components, gradient styling",
-            networking: "Combine, URLSession, resilient decoding helpers",
-            storage: "Keychain for tokens, async image caching utilities",
-        },
-        link: "https://github.com/PhiPhiPham/Studdies-FE",
     },
 }
 
 export default function PortfolioDetail() {
-    const params = useParams()
-    const projectId = params.id as string
-    const project = projectDetails[Number(projectId) as keyof typeof projectDetails]
+    const params = useParams<{ id: string }>()
+    const projectId = Number(params.id)
+    const project = projectDetails[projectId]
 
     const [currentImageIndex, setCurrentImageIndex] = useState(0)
     const [activeSection, setActiveSection] = useState("overview")
@@ -413,11 +357,9 @@ export default function PortfolioDetail() {
                         </Link>
                         <div className="flex items-center gap-4">
                             <Badge variant="secondary">{project.year}</Badge>
-                            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                            {(project as any).link && (
+                            {project.link && (
                                 <Button size="sm" variant="outline" asChild>
-                                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                                    <a href={(project as any).link} target="_blank" rel="noopener noreferrer">
+                                    <a href={project.link} target="_blank" rel="noopener noreferrer">
                                         <ExternalLink className="w-4 h-4 mr-2" />
                                         Live Demo
                                     </a>
@@ -565,39 +507,32 @@ export default function PortfolioDetail() {
                         </section>
 
                         {/* System Architecture */}
-                        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                        {(project as any).systemArchitecture && (
+                        {project.systemArchitecture && (
                             <section id="architecture" className="scroll-mt-24">
                                 <h2 className="text-3xl font-bold mb-6">System Architecture</h2>
                                 <div className="relative w-full rounded-lg overflow-hidden bg-muted/50 p-4">
-                                    {/* eslint-disable @typescript-eslint/no-explicit-any */}
                                     <Image
-                                        src={(project as any).systemArchitecture}
+                                        src={project.systemArchitecture}
                                         alt="System Architecture Diagram"
                                         width={1200}
                                         height={800}
                                         className="w-full h-auto object-contain"
                                     />
-                                    {/* eslint-enable @typescript-eslint/no-explicit-any */}
                                 </div>
                             </section>
                         )}
 
                         {/* My Role */}
-                        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                        {(project as any).myRole && (
+                        {project.myRole && (
                             <section id="role" className="scroll-mt-24">
                                 <h2 className="text-3xl font-bold mb-6">My Role</h2>
                                 <div className="prose prose-lg max-w-none">
-                                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                                    <p className="text-muted-foreground leading-relaxed mb-6">{(project as any).myRole}</p>
-                                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                                    {(project as any).keyContributions && (
+                                    <p className="text-muted-foreground leading-relaxed mb-6">{project.myRole}</p>
+                                    {project.keyContributions && (
                                         <div className="space-y-3">
                                             <h3 className="text-xl font-semibold mb-4">Key Contributions</h3>
                                             <ul className="space-y-2">
-                                                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                                                {(project as any).keyContributions.map((contribution: string, index: number) => (
+                                                {project.keyContributions.map((contribution, index) => (
                                                     <li key={index} className="flex items-start gap-3">
                                                         <span className="text-primary mt-1">•</span>
                                                         <span className="text-muted-foreground leading-relaxed">{contribution}</span>
@@ -611,13 +546,11 @@ export default function PortfolioDetail() {
                         )}
 
                         {/* AI Matching Pipeline */}
-                        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                        {(project as any).aiPipeline && (
+                        {project.aiPipeline && (
                             <section id="pipeline" className="scroll-mt-24">
                                 <h2 className="text-3xl font-bold mb-6">AI Matching Pipeline</h2>
                                 <div className="space-y-4">
-                                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                                    {(project as any).aiPipeline.map((step: any, index: number) => (
+                                    {project.aiPipeline.map((step, index) => (
                                         <Card key={index}>
                                             <CardContent className="p-6">
                                                 <div className="flex gap-4">
@@ -637,13 +570,11 @@ export default function PortfolioDetail() {
                         )}
 
                         {/* Technical Highlights */}
-                        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                        {(project as any).technicalHighlights && (
+                        {project.technicalHighlights && (
                             <section id="technical" className="scroll-mt-24">
                                 <h2 className="text-3xl font-bold mb-6">Technical Highlights</h2>
                                 <ul className="space-y-3">
-                                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                                    {(project as any).technicalHighlights.map((highlight: string, index: number) => (
+                                    {project.technicalHighlights.map((highlight, index) => (
                                         <li key={index} className="flex items-start gap-3">
                                             <span className="text-primary mt-1">•</span>
                                             <span className="text-muted-foreground leading-relaxed">{highlight}</span>
@@ -654,25 +585,21 @@ export default function PortfolioDetail() {
                         )}
 
                         {/* Challenges & Learnings */}
-                        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                        {(project as any).challengesLearnings && (
+                        {project.challengesLearnings && (
                             <section id="learnings" className="scroll-mt-24">
                                 <h2 className="text-3xl font-bold mb-6">Challenges & Learnings</h2>
                                 <div className="prose prose-lg max-w-none">
-                                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                                    <p className="text-muted-foreground leading-relaxed whitespace-pre-line">{(project as any).challengesLearnings}</p>
+                                    <p className="text-muted-foreground leading-relaxed whitespace-pre-line">{project.challengesLearnings}</p>
                                 </div>
                             </section>
                         )}
 
                         {/* Future Improvements */}
-                        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                        {(project as any).futureImprovements && (
+                        {project.futureImprovements && (
                             <section id="future" className="scroll-mt-24">
                                 <h2 className="text-3xl font-bold mb-6">Future Improvements</h2>
                                 <ul className="space-y-3">
-                                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                                    {(project as any).futureImprovements.map((improvement: string, index: number) => (
+                                    {project.futureImprovements.map((improvement, index) => (
                                         <li key={index} className="flex items-start gap-3">
                                             <span className="text-primary mt-1">•</span>
                                             <span className="text-muted-foreground leading-relaxed">{improvement}</span>
@@ -683,17 +610,15 @@ export default function PortfolioDetail() {
                         )}
 
                         {/* Tech Stack */}
-                        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                        {(project as any).techStack && (
+                        {project.techStack && (
                             <section id="tech-stack" className="scroll-mt-24">
                                 <h2 className="text-3xl font-bold mb-6">Tech Stack</h2>
                                 <div className="grid gap-4 md:grid-cols-2">
-                                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                                    {Object.entries((project as any).techStack).map(([key, value]) => (
+                                    {(Object.entries(project.techStack) as [string, string][]).map(([key, value]) => (
                                         <Card key={key}>
                                             <CardContent className="p-6">
                                                 <h3 className="font-semibold mb-2 capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}</h3>
-                                                <p className="text-sm text-muted-foreground">{value as string}</p>
+                                                <p className="text-sm text-muted-foreground">{value}</p>
                                             </CardContent>
                                         </Card>
                                     ))}
@@ -702,28 +627,24 @@ export default function PortfolioDetail() {
                         )}
 
                         {/* Team */}
-                        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                        {(project as any).team && (
+                        {project.team && (
                             <section id="team" className="scroll-mt-24">
                                 <h2 className="text-3xl font-bold mb-6">Team</h2>
                                 <div className="space-y-3">
                                     <p className="text-muted-foreground mb-4">3 Developers:</p>
                                     <ul className="space-y-2 ml-4">
-                                        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                                        {(project as any).team.map((member: string, index: number) => (
+                                        {project.team.map((member, index) => (
                                             <li key={index} className="flex items-start gap-3">
                                                 <span className="text-primary mt-1">•</span>
                                                 <span className="text-muted-foreground leading-relaxed">{member}</span>
                                             </li>
                                         ))}
                                     </ul>
-                                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                                    {(project as any).designers && (
+                                    {project.designers && (
                                         <>
                                             <p className="text-muted-foreground mb-4 mt-6">All 3 designers are responsible for:</p>
                                             <ul className="space-y-2 ml-4">
-                                                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                                                {(project as any).designers.map((designer: string, index: number) => (
+                                                {project.designers.map((designer, index) => (
                                                     <li key={index} className="flex items-start gap-3">
                                                         <span className="text-primary mt-1">•</span>
                                                         <span className="text-muted-foreground leading-relaxed">{designer}</span>
