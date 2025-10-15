@@ -1,6 +1,6 @@
 'use client'
 import { Button } from "@/components/ui/button"
-import { Github, Linkedin, FileUser } from "lucide-react"
+import { Github, Linkedin, FileUser, ChevronDown } from "lucide-react"
 import { motion } from "motion/react"
 import Image from "next/image"
 import LeetcodeIcon from './leet-code'
@@ -30,6 +30,16 @@ const socialLinks = [
 ];
 
 export default function HeroSection() {
+    const scrollToProjects = () => {
+        const portfolioSection = document.getElementById('portfolio-section');
+        if (portfolioSection) {
+            portfolioSection.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    };
+
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
@@ -66,10 +76,10 @@ export default function HeroSection() {
     };
 
     return (
-        <div className="grid grid-rows items-center justify-items-center min-h-screen font-[family-name:var(--font-inter)] ">
+        <div className="relative flex flex-col items-center justify-center min-h-screen font-[family-name:var(--font-inter)] ">
             <section
                 id="hero-section"
-                className="container mx-auto px-6 py-12 flex flex-col items-center lg:flex-row lg:justify-between"
+                className="container mx-auto px-6 py-12 flex flex-col items-center lg:flex-row lg:justify-between flex-grow"
             >
                 <motion.div
                     className="lg:w-1/2 space-y-8"
@@ -169,6 +179,47 @@ export default function HeroSection() {
                     </div>
                 </motion.div>
             </section>
+
+            {/* Scroll Down Indicator */}
+            <motion.div
+                className="w-full flex flex-col items-center text-center pb-8 mt-8"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ 
+                    opacity: 1, 
+                    y: 0,
+                }}
+                transition={{ 
+                    duration: 0.6, 
+                    delay: 1,
+                }}
+            >
+                <h2 className="text-3xl sm:text-4xl font-bold text-gray-700 dark:text-gray-300 mb-3">
+                    Explore My Work
+                </h2>
+                <p className="text-gray-500 dark:text-gray-400 mb-6">
+                    Discover projects from 2025 to 2024
+                </p>
+                <motion.button
+                    onClick={scrollToProjects}
+                    className="flex items-center gap-2 text-orange-400 hover:text-orange-500 font-semibold text-lg transition-colors cursor-pointer bg-transparent border-none"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                >
+                    View Portfolio
+                    <motion.div
+                        animate={{ 
+                            y: [0, 5, 0],
+                        }}
+                        transition={{
+                            duration: 1.5,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                        }}
+                    >
+                        <ChevronDown size={24} />
+                    </motion.div>
+                </motion.button>
+            </motion.div>
         </div>
     )
 }

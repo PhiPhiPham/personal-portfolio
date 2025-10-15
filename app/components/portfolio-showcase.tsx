@@ -117,7 +117,7 @@ export default function PortfolioShowcase() {
     }
 
     return (
-        <div className="min-h-screen bg-background">
+        <div id="portfolio-section" className="min-h-screen bg-background">
             {/* Header */}
             <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b">
                 <div className="container mx-auto px-4 py-4">
