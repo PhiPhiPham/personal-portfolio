@@ -22,7 +22,7 @@ declare global {
 const particlesConfig = {
   particles: {
     number: {
-      value: 65,
+      value: 80,
       density: {
         enable: true,
         value_area: 900,
@@ -35,7 +35,7 @@ const particlesConfig = {
       type: 'circle',
     },
     opacity: {
-      value: 0.35,
+      value: 0.45,
       random: false,
       anim: {
         enable: false,
@@ -45,7 +45,7 @@ const particlesConfig = {
       },
     },
     size: {
-      value: 3,
+      value: 3.5,
       random: true,
       anim: {
         enable: true,
@@ -56,10 +56,10 @@ const particlesConfig = {
     },
     line_linked: {
       enable: true,
-      distance: 150,
+      distance: 140,
       color: '#93c5fd',
-      opacity: 0.4,
-      width: 1,
+      opacity: 0.55,
+      width: 1.2,
     },
     move: {
       enable: true,

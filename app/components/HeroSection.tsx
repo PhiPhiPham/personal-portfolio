@@ -81,7 +81,7 @@ export default function HeroSection() {
             <ParticlesBackground />
             <section
                 id="hero-section"
-                className="relative z-10 container mx-auto px-6 py-12 flex flex-col items-center lg:flex-row lg:justify-between flex-grow"
+                className="relative z-10 container mx-auto px-6 py-12 flex flex-col items-center lg:flex-row lg:justify-between flex-grow bg-transparent"
             >
                 <motion.div
                     className="lg:w-1/2 space-y-8"
