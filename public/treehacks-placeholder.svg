@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="tree-grad" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#1f2937"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#tree-grad)"/>
+  <g fill="none" stroke="#34d399" stroke-width="10" opacity="0.5">
+    <path d="M300 680c120-200 280-300 480-300s360 100 520 300"/>
+    <path d="M360 720c100-160 240-240 420-240s320 80 460 240"/>
+  </g>
+  <g fill="#22d3ee" opacity="0.3">
+    <circle cx="400" cy="220" r="70"/>
+    <circle cx="1260" cy="180" r="95"/>
+    <circle cx="1440" cy="640" r="60"/>
+  </g>
+  <text x="800" y="420" text-anchor="middle" fill="#d1fae5" font-family="Arial, Helvetica, sans-serif" font-size="90" font-weight="700">
+    3D BeReal
+  </text>
+  <text x="800" y="510" text-anchor="middle" fill="#a7f3d0" font-family="Arial, Helvetica, sans-serif" font-size="40" font-weight="500">
+    TreeHacks Prototype · AVFoundation · Firebase Sync
+  </text>
+</svg>

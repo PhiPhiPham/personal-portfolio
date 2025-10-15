@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="xo-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f97316"/>
+      <stop offset="50%" stop-color="#fb7185"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#xo-grad)"/>
+  <g stroke="#fef3c7" stroke-width="14" stroke-linecap="round">
+    <line x1="260" y1="200" x2="520" y2="460" opacity="0.45"/>
+    <line x1="260" y1="460" x2="520" y2="200" opacity="0.45"/>
+    <circle cx="1290" cy="330" r="150" fill="none" opacity="0.4"/>
+  </g>
+  <text x="800" y="420" text-anchor="middle" fill="#fff7ed" font-family="Arial, Helvetica, sans-serif" font-size="96" font-weight="700">
+    Project.XO
+  </text>
+  <text x="800" y="515" text-anchor="middle" fill="#fefce8" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="500">
+    Personality Matching Quiz · Next.js · Supabase · Midtrans
+  </text>
+</svg>

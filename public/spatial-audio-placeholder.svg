@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <radialGradient id="audio-grad" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.95"/>
+      <stop offset="60%" stop-color="#312e81" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#111827" stop-opacity="1"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="900" fill="#020617"/>
+  <circle cx="800" cy="450" r="360" fill="url(#audio-grad)"/>
+  <g fill="none" stroke="#38bdf8" stroke-width="8" opacity="0.45">
+    <circle cx="800" cy="450" r="150"/>
+    <circle cx="800" cy="450" r="230"/>
+    <circle cx="800" cy="450" r="300"/>
+  </g>
+  <g fill="#fde68a" opacity="0.4">
+    <circle cx="440" cy="280" r="40"/>
+    <circle cx="1220" cy="620" r="55"/>
+  </g>
+  <text x="800" y="420" text-anchor="middle" fill="#f8fafc" font-family="Arial, Helvetica, sans-serif" font-size="92" font-weight="700">
+    Spatial Audio
+  </text>
+  <text x="800" y="515" text-anchor="middle" fill="#cbd5f5" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="500">
+    SwiftUI Demo · Spatialized 3D Sound Lab
+  </text>
+</svg>
