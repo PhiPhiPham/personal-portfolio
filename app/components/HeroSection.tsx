@@ -170,7 +170,7 @@ export default function HeroSection() {
                     transition={{ duration: 0.6, delay: 0.4 }}
                 >
                     <div className="relative">
-                        <div className="absolute inset-0 bg-orange-400 rounded-full blur-2xl opacity-20"></div>
+                        <div className="absolute inset-0 bg-orange-400 rounded-full blur-2xl opacity-0 dark:opacity-20"></div>
                         <Image
                             src="/profile-picture.JPG"
                             alt="Phi Phi's profile"
